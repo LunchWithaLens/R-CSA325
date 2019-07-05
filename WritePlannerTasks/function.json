@@ -1,0 +1,12 @@
+{
+    "bindings": [
+      {
+        "name": "triggerInput",
+        "type": "queueTrigger",
+        "direction": "in",
+        "queueName": "message-center-to-planner-tasks",
+        "connection": "brismitho365mcr93ec_STORAGE"
+      }
+    ],
+    "disabled": false
+  }

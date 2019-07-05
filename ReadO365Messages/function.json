@@ -1,0 +1,18 @@
+{
+    "bindings": [
+      {
+        "name": "myTimer",
+        "type": "timerTrigger",
+        "direction": "in",
+        "schedule": "0 0 16 * * *"
+      },
+      {
+        "type": "queue",
+        "name": "outputQueueItem",
+        "queueName": "outqueue",
+        "connection": "brismitho365mcr93ec_STORAGE",
+        "direction": "out"
+      }
+    ],
+    "disabled": false
+  }

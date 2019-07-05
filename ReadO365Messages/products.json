@@ -1,0 +1,42 @@
+[
+    {
+        "product": "Yammer", 
+        "bucketId": "fUWw9zVq-E6VrgX16NldjGUAKSJ-", 
+        "assignee": "ded29fcd-46cc-432b-9965-06e43d48ada0"
+        },
+    {
+        "product": "Project", 
+        "bucketId": "f97qnX9lgUaaeP3iDMTHi2UACQu4", 
+        "assignee": "3c943b63-6a74-460c-acd2-658db7e939f5"
+        },
+    {
+        "product": "Planner", 
+        "bucketId": "GjfLUTlIAUa3QymjriNjj2UACyxx", 
+        "assignee": "3c943b63-6a74-460c-acd2-658db7e939f5"
+        },
+    {
+        "product": "Dynamics", 
+        "bucketId": "tjhou3Uk9Uim5Oviiijz3GUAE2_D", 
+        "assignee": "3c943b63-6a74-460c-acd2-658db7e939f5"
+        },
+    {
+        "product": "Updated", 
+        "bucketId": "-k8WPK4B60K_AapiogtNYGUAH-Je", 
+        "assignee": "eec127b3-9752-402c-9221-97e0cbaa4eb9"
+    },
+    {
+        "product": "New", 
+        "bucketId": "B56UoUBiT0qxH0Bh23ncB2UAGw2j", 
+        "assignee": "2aab273d-d570-43e4-9b80-6c7e1301839f"
+    },
+    {
+        "product": "SharePoint", 
+        "bucketId": "KO-xnhEcqU-Pb3zk6Q9rAWUANiIr", 
+        "assignee": "ad6bb742-4d9b-4020-bbb4-c453ed07bd88"
+    },
+    {
+        "product": "Teams", 
+        "bucketId": "BtbgrGiFMUOvI5Mc9gTbimUACOqJ", 
+        "assignee": "8775b804-ac16-4050-aa7b-bf82c9610cf0"
+    }
+]
