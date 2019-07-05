@@ -14,7 +14,7 @@ $adal = "D:\home\site\wwwroot\reado365messages\Microsoft.IdentityModel.Clients.A
   
 $resourceAppIdURI = “https://manage.office.com”
    
-$authority = “https://login.windows.net/$env:aadtenant”
+$authority = “https://login.windows.net/$env:aad_tenant”
    
 $authContext = New-Object "Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext" -ArgumentList $authority
 $uc = new-object Microsoft.IdentityModel.Clients.ActiveDirectory.UserCredential -ArgumentList $Credential.Username,$Credential.Password

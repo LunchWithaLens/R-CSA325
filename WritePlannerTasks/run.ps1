@@ -23,7 +23,7 @@ $adal = "D:\home\site\wwwroot\writeplannertasks\Microsoft.IdentityModel.Clients.
   
 $resourceAppIdURI = “https://graph.microsoft.com”
    
-$authority = “https://login.windows.net/$env:aadTenant”
+$authority = “https://login.windows.net/$env:aad_tenant”
    
 $authContext = New-Object "Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext" -ArgumentList $authority
 $uc = new-object Microsoft.IdentityModel.Clients.ActiveDirectory.UserCredential -ArgumentList $Credential.Username,$Credential.Password
