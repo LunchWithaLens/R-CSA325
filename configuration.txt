@@ -1,0 +1,10 @@
+Values that need setting in the Application settings for the function
+
+aad_username - this is the Office365 account that has permissions to both the message center and to write to the plan
+aad_password - Password for above - an enhancement here would be to read this from Azure Vault
+aad_tenant - This is the name of your tenant - for example brismith365.onmicrosoft.com (not the Url)
+clientId - This is the application ID created in Azure with permissions to read/write all groups
+messageCenterPlanId - This is the ID of the Plan to write to - it can be seen in the Url when selecting the Plan in Planner
+tenantId - This is the GUID that represents your tenant - you can find it in the Azure Active Directory admin center - properties - Directory ID
+
+Other values that will be added for you include the STORAGE link for the queue to be used, the Application Insights information and other values.
