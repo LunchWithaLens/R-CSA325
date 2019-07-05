@@ -14,11 +14,11 @@ $Credential = New-Object -typename System.Management.Automation.PSCredential
 #$Modulebase = (get-Module MicrosoftGraphAPI).ModuleBase
 
 #Import-Module "C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Services\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
-Import-Module "D:\home\site\wwwroot\writemctoplantask\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
+Import-Module "D:\home\site\wwwroot\writeplannertasks\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
  
   
 #$adal = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Services\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
-$adal = "D:\home\site\wwwroot\writemctoplantask\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
+$adal = "D:\home\site\wwwroot\writeplannertasks\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
 [System.Reflection.Assembly]::LoadFrom($adal)
   
 $resourceAppIdURI = “https://graph.microsoft.com”

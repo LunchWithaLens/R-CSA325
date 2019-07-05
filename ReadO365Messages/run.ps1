@@ -7,9 +7,9 @@ $password = $env:aad_password | ConvertTo-SecureString -AsPlainText -Force
 
 $Credential = New-Object -typename System.Management.Automation.PSCredential -argumentlist $env:aad_username, $password
    
-Import-Module "D:\home\site\wwwroot\reado365mcall\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
+Import-Module "D:\home\site\wwwroot\reado365messages\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
    
-$adal = "D:\home\site\wwwroot\reado365mcall\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
+$adal = "D:\home\site\wwwroot\reado365messages\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
 [System.Reflection.Assembly]::LoadFrom($adal)
   
 $resourceAppIdURI = “https://manage.office.com”
@@ -22,7 +22,7 @@ $uc = new-object Microsoft.IdentityModel.Clients.ActiveDirectory.UserCredenti
 $manageToken = $authContext.AcquireToken($resourceAppIdURI, $env:clientId,$uc)
 
 #Get the products we are interested in
-$products = Get-Content 'D:\home\site\wwwroot\reado365mcall\products.json' | Out-String | ConvertFrom-json
+$products = Get-Content 'D:\home\site\wwwroot\reado365messages\products.json' | Out-String | ConvertFrom-json
 
 ###############################################################
 # Read service messages posts and get ones of Type MessageCenter
