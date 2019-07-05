@@ -1,5 +1,5 @@
 # R-CSA325
-Repo for Microsoft Ready session on O365 Message Center to Planner integration
+## Repo for Microsoft Ready session on O365 Message Center to Planner integration
 
 TL;DR
 The Azure fuctions can be used to 
