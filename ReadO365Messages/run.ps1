@@ -58,7 +58,7 @@ $task.Add('assignee', $product.assignee)
 
 #Using best practice async via queue storage
 
-$storeAuthContext = New-AzureStorageContext -ConnectionString $env:brismitho365mcr93ec_STORAGE 
+$storeAuthContext = New-AzureStorageContext -ConnectionString $env:AzureWebJobsStorage 
 
 $outQueue = Get-AzureStorageQueue –Name 'message-center-to-planner-tasks' -Context $storeAuthContext
 if ($outQueue -eq $null) {
