@@ -40,15 +40,25 @@ Detailed steps:
 6. Construct your products.json.  The product may or may not match the bucket, but obviously should be related.  I have used some product names and also new and updated to get specific types of messages.  A message may be copied to more than one bucket if it matches more than one product.  The bucket IDs come from step 4, and the assignee IDs from step 5.
 
     [
+
         {
+
             "product": “New", 
+
             "bucketId": " yLZpnXLpJUmGRECbFiogsQgAEGcb ", 
+
             "assignee": " 2545703b-333d-4688-ad69-4d2b6f2ceafe "
+
         },
+
         {
+
             "product": “Updated", 
+
             "bucketId": " LZ53WX0A-USEY1CuVBv0RggAC8_Y ", 
+
             "assignee": " a48e6530-3ceb-47b6-889d-53613159597d "
+
         },…
 
 
