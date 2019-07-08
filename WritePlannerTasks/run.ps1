@@ -2,22 +2,17 @@ $in = Get-Content $triggerInput -Raw
 $messageCenterTask = $in | ConvertFrom-Json
 $title = $messageCenterTask.title
 
-# BriSmith@Microsoft.com https://blogs.msdn.microsoft.com/brismith
-# Code to read O365 Message Center posts from the message queue anr create Planner tasks
+# BriSmith@Microsoft.com https://techcommunity.microsoft.com/t5/Planner-Blog/Microsoft-Planner-A-Change-Management-Solution-for-Office-365/ba-p/362360
+# Code to read O365 Message Center posts from the message queue and create Planner tasks
 
-#Setup stuff for the Graph API Calls
+# Setup stuff for the Graph API Calls
 
 $password = $env:aad_password | ConvertTo-SecureString -AsPlainText -Force
 
 $Credential = New-Object -typename System.Management.Automation.PSCredential -argumentlist $env:aad_username, $password
    
-#$Modulebase = (get-Module MicrosoftGraphAPI).ModuleBase
-
-#Import-Module "C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Services\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
 Import-Module "D:\home\site\wwwroot\writeplannertasks\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
- 
   
-#$adal = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Services\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
 $adal = "D:\home\site\wwwroot\writeplannertasks\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
 [System.Reflection.Assembly]::LoadFrom($adal)
   
@@ -28,12 +23,15 @@ $authority = “https://login.windows.net/$env:aad_tenant”
 $authContext = New-Object "Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext" -ArgumentList $authority
 $uc = new-object Microsoft.IdentityModel.Clients.ActiveDirectory.UserCredential -ArgumentList $Credential.Username,$Credential.Password
 
+# Get graph token
 $graphToken = $authContext.AcquireToken($resourceAppIdURI, $env:clientId,$uc)
 
 $messageCenterPlanId= $env:messageCenterPlanId
 
 #################################################
 # Get tasks
+# Shouldn't be an issue with this scenario - but limit on task
+# read of around 400 would mean paging required for larger plans
 #################################################
 
 $headers = @{}
@@ -49,6 +47,7 @@ $messageCenterPlanTasksValue = $messageCenterPlanTasksValue | Sort-Object bucket
 
 #################################################
 # Check if the task already exists by bucketId
+# I just add tasks I don't already have
 #################################################
 $taskExists = $FALSE
 ForEach($existingTask in $messageCenterPlanTasksValue){
@@ -65,10 +64,12 @@ If($messageCenterTask.dueDate){
 $setTask.Add("dueDateTime", ([DateTime]$messageCenterTask.dueDate))
 }
 $setTask.Add("orderHint", " !")
+# Fixing some weird encoding stuff - probably better way...
 $setTask.Add("title", ($messageCenterTask.title -replace "â€™", "'"))
 $setTask.Add("planId", $messageCenterPlanId)
 
 # Setting Applied Categories
+# Aritrary mapping - other options available
 $appliedCategories = @{}
 if($messageCenterTask.categories -match 'Action'){
     $appliedCategories.Add("category1",$TRUE)
@@ -98,6 +99,7 @@ else{$appliedCategories.Add("category6",$FALSE)}
 $setTask.Add("appliedCategories",$appliedCategories)
 
 # Set bucket and assignee
+# Bucket = product
 
 $setTask.Add("bucketId", $messageCenterTask.bucketId)
 $assignmentType = @{}
@@ -131,15 +133,12 @@ $regex = 'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-
 # Find all matches in description and add to an array
 select-string -Input $messageCenterTask.description -Pattern $regex -AllMatches | % { $_.Matches } | % {     $matches.add($_.Value)}
 
-
-
-#Replacing some forbidden characters for odata properties
+# Replacing some forbidden characters for odata properties
 $externalLink = $messageCenterTask.reference -replace '\.', '%2E'
 $externalLink = $externalLink -replace ':', '%3A'
 $externalLink = $externalLink -replace '\#', '%23'
 $externalLink = $externalLink -replace '\@', '%40'
 $messageCenterTask.description = $messageCenterTask.description -replace '[\u201C\u201D]', '"'
-#$messageCenterTask.description = $messageCenterTask.description -replace "[”]", '' 
 $messageCenterTask.description = $messageCenterTask.description -replace "â€œ", '"' 
 $messageCenterTask.description = $messageCenterTask.description -replace "â€™", "'"
 $messageCenterTask.description = $messageCenterTask.description -replace "â€", '"'
@@ -153,6 +152,7 @@ $reference.Add("alias", "Additional Information")
 $reference.Add("type", "Other")
 $reference.Add('previewPriority', ' !')
 $references = @{}
+# Urls with trailing spaces caused failures - hence .trim() below
 ForEach($match in $matches){
 $match = $match -replace '\.', '%2E'
 $match = $match -replace ':', '%3A'
@@ -166,6 +166,8 @@ $references.Add($externalLink.trim(), $reference)
 $setTaskDetails.Add("references", $references)
 $setTaskDetails.Add("previewType", "reference")
 }
+# The sleep was to ensure the task was persisted before reading back
+# Probably a better way via error checking
 Start-Sleep -s 2
 #Get Current Etag for task details
 
@@ -189,4 +191,4 @@ $uri = "https://graph.microsoft.com/v1.0/planner/tasks/" + $newTaskId + "/detail
 $result = Invoke-WebRequest -Uri $uri -Method PATCH -Body $Request -Headers $headers -UseBasicParsing
 }
 Write-Output "PowerShell script processed queue message '$title'"
-
+# Write-Output also useful for debugging the functions
