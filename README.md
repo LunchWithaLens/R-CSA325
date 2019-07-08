@@ -66,7 +66,7 @@ Detailed steps:
     a. Navigate to Azure Active Directory Admin Center (App Launcher, Admin, Show All, Admin Centers, Azure Active Directory
     b. Select App registrations
     c. Name the App and register - make a note of the Application (client) ID
-    d. API Permissions, Add a permisison, then add Office 365 Management APIs – Application permissions, ServiceHealth.Read and 
+    d. API Permissions, Add a permisison, then add Office 365 Management APIs – Delegated permissions, ServiceHealth.Read and 
 Microsoft Graph, Delegated Permissions, Group.ReadWrite.All
     e. Grant admin consent for Contoso (or to whoever your tenant is)
     f. Authentication – Advanced settings – Default client type. Set to Yes for Treat application as a public client
@@ -84,6 +84,25 @@ Microsoft Graph, Delegated Permissions, Group.ReadWrite.All
     a. Copy the two run.ps1 samples in place of the default code - the directories in the Github repro match the function names.  If you didn't use my suggested names for the functions then the paths in the code will need to be edited
     b. Upload the DLL - Microsoft.IdentityModel.Clients.ActiveDirectory.dll - by clicking the View files under each function then selecting Upload - upload to each function
     c. Upload your products.json to the ReadO365Messages function (Don't use mine - the IDs will all be wrong)
+11. Add your variables
+    a. At the root of the Function App, Configuration, and add new application settings for:
+    b. *aad_tenant
+    c. *aad_username
+    d. *aad_password
+    e. *clientId
+    f. *tenantId
+    g. *messageCenterPlanId
+    h. Don't forget to Save
+At this point the ReadO365Messages function can be run.  It may fail first time as it appears the creating of the queue happens, but is still not found to write to.  Running again should then work, and the schedule should run from there on.
+Last step is to add the text to the coloured labels.  This can be done on any of the tasks and is then set for the plan
+* Action
+* Plan for Change
+* Prevent or Fix Issues
+* Advisory
+* Awareness
+* Stay Informed
+
+
 
 
 
