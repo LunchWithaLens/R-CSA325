@@ -30,6 +30,7 @@ $messageCenterPlanId= $env:messageCenterPlanId
 
 #################################################
 # Get tasks
+# https://docs.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0
 # Shouldn't be an issue with this scenario - but limit on task
 # read of around 400 would mean paging required for larger plans
 #################################################
