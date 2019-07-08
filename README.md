@@ -139,6 +139,7 @@ Microsoft Graph, Delegated Permissions, Group.ReadWrite.All
     * clientId
     * tenantId
     * messageCenterPlanId
+
     Don't forget to Save
     
 At this point the ReadO365Messages function can be run.  It may fail first time as it appears the creating of the queue happens, but is still not found to write to.  Running again should then work, and the schedule should run from there on.
