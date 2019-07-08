@@ -13,10 +13,15 @@ products.json defines the buckets and assignees, as well as the topics of intere
 
 Detailed steps:
 1. Get the Function App started - it only takes a few minutes but will save a wait later
-    a. Open https://portal.azure.com
-    b. Create a resource
-    c. Function App, give it a name - take defaults - choose a local location
-    d. We will come back to it later...
+
+    a.  Open https://portal.azure.com
+    
+    b.  Create a resource
+    
+    c.  Function App, give it a name - take defaults - choose a local location
+    
+    d.  We will come back to it later...
+    
 2. Get the files you will need (if you are reading this you might already have them)
     a. https://github.com/LunchWithaLens/R-CSA325.git
     b. If you have Git installed then git clone https://github.com/LunchWithaLens/R-CSA325.git
