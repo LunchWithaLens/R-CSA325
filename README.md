@@ -39,6 +39,7 @@ Detailed steps:
     c. Note the IDs of your members
 6. Construct your products.json.  The product may or may not match the bucket, but obviously should be related.  I have used some product names and also new and updated to get specific types of messages.  A message may be copied to more than one bucket if it matches more than one product.  The bucket IDs come from step 4, and the assignee IDs from step 5.
 
+    
     [
 
         {
@@ -61,10 +62,28 @@ Detailed steps:
 
         },…
 
-
-
-
-
+7. Get a clientId for your application, from your Office365 Admin Center, Azure Active Directory
+    a. Navigate to Azure Active Directory Admin Center (App Launcher, Admin, Show All, Admin Centers, Azure Active Directory
+    b. Select App registrations
+    c. Name the App and register - make a note of the Application (client) ID
+    d. API Permissions, Add a permisison, then add Office 365 Management APIs – Application permissions, ServiceHealth.Read and 
+Microsoft Graph, Delegated Permissions, Group.ReadWrite.All
+    e. Grant admin consent for Contoso (or to whoever your tenant is)
+    f. Authentication – Advanced settings – Default client type. Set to Yes for Treat application as a public client
+8. Your Azure function should be ready now - so back to your Azure portal and find your Function App
+    a. IMPORTANT!  Platform features, Function App settings and change Runtime version to 1
+    b. Add a function by clicking the +, choose create your own custom function
+    c. Enable Experimental Language Support to light up PowerShell, then choose PowerShell in the Timer trigger language list
+    d. Leave language as PowerShell, set the name to ReadO365Messages, and set the schedule to 0 0 16 * * (4pm UTC daily)
+9. Configuring the ReadO365Messages function
+    a. Under Integratye click + New Output, and choose Azure Queue Storage, then Select
+    b. Change the Queue name to message-center-to-planner-tasks and click Save, then once saved click Go next to Create a new function triggered by this output
+    c. Enable Experimental Language Support again, then choose PowerShell in the Queue trigger language list
+    d. Name the function WritePlannerTasks, and change the Queue name to message-center-to-planner-tasks, then click Create
+10. Put our PowerShell code and required DLL in place
+    a. Copy the two run.ps1 samples in place of the default code - the directories in the Github repro match the function names.  If you didn't use my suggested names for the functions then the paths in the code will need to be edited
+    b. Upload the DLL - Microsoft.IdentityModel.Clients.ActiveDirectory.dll - by clicking the View files under each function then selecting Upload - upload to each function
+    c. Upload your products.json to the ReadO365Messages function (Don't use mine - the IDs will all be wrong)
 
 
 
