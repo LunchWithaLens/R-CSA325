@@ -8,7 +8,7 @@ The Azure fuctions can be used to
 
 Make sure your Azure Function is v1 and uses PowerShell!
 Use ADAL v2.28 or 2.29
-Configure a clientId that can read/write Office365 Groups, and read O365 Management APIs, ServiceHealth
+Configure a clientId that can read/write Office365 Groups, and read O365 Management APIs, ServiceHealth  
 products.json defines the buckets and assignees, as well as the topics of interest
 
 Detailed steps:
@@ -18,7 +18,7 @@ Detailed steps:
     
     b.  Create a resource
     
-    c.  Function App, give it a name - take defaults - choose a local location
+    c.  __Function App__, give it a name - take defaults - choose a local location
     
     d.  We will come back to it later...
     
@@ -26,11 +26,11 @@ Detailed steps:
 
     a. https://github.com/LunchWithaLens/R-CSA325.git
     
-    b. If you have Git installed then git clone https://github.com/LunchWithaLens/R-CSA325.git
+    b. If you have Git installed then __git clone https://github.com/LunchWithaLens/R-CSA325.git__
     
 3. Create the target Plan for your Office 365 messages to go into - add a few buckets and members
 
-    a. In the App Launcher of Office 365 (not the Microsoft tenant - as we will not be able to set the right permissions) click Planner
+    a. In the App Launcher of Office 365 (not the Microsoft tenant - as we will not be able to set the right permissions) click __Planner__
     
     b. I used a demo tenant, and created a plan and added 4 buckets, 4 members
     
@@ -46,60 +46,45 @@ Detailed steps:
     
     d. Modify permissions (add Group Read/Write All)
     
-    e. Give consent (If you haven't used Graph against your tenant before)
+    e. Give consent (If you have used Graph against your tenant before then this and the previous step may not be needed)
     
     f. https://graph.microsoft.com/v1.0/me/Planner/Plans
     
-    g. https://graph.microsoft.com/v1.0/Planner/Plans/<planId>/Buckets
+    g. https://graph.microsoft.com/v1.0/Planner/Plans/<__planId__>/Buckets
     
     h. Note the Id for each of your buckets
     
 5. Identify your members using Graph Explorer
 
 
-    b. https://graph.microsoft.com/v1.0/Groups/<GroupId>/Members
+    b. https://graph.microsoft.com/v1.0/Groups/<__GroupId__>/Members
     
     c. Note the IDs of your members
     
 6. Construct your products.json.  The product may or may not match the bucket, but obviously should be related.  I have used some product names and also new and updated to get specific types of messages.  A message may be copied to more than one bucket if it matches more than one product.  The bucket IDs come from step 4, and the assignee IDs from step 5.
 
     
-    [
+    >[  
+    >    {  
+    >        "product": “New",  
+    >        "bucketId": "yLZpnXLpJUmGRECbFiogsQgAEGcb",   
+    >        "assignee": "2545703b-333d-4688-ad69-4d2b6f2ceafe"  
+    >    },  
+    >    {  
+    >        "product": “Updated",     
+    >        "bucketId": "LZ53WX0A-USEY1CuVBv0RggAC8_Y",   
+    >        "assignee": "a48e6530-3ceb-47b6-889d-53613159597d"  
+    >    },…  
 
-        {
+7. Get a __clientId__ for your application, from your __Office365 Admin Center, Azure Active Directory__
 
-            "product": “New", 
-
-            "bucketId": " yLZpnXLpJUmGRECbFiogsQgAEGcb ", 
-
-            "assignee": " 2545703b-333d-4688-ad69-4d2b6f2ceafe "
-
-        },
-
-        {
-
-            "product": “Updated", 
-
-            "bucketId": " LZ53WX0A-USEY1CuVBv0RggAC8_Y ", 
-
-            "assignee": " a48e6530-3ceb-47b6-889d-53613159597d "
-
-        },…
-
-7. Get a clientId for your application, from your Office365 Admin Center, Azure Active Directory
-
-    a. Navigate to Azure Active Directory Admin Center (App Launcher, Admin, Show All, Admin Centers, Azure Active Directory
-    
-    b. Select App registrations
-    
-    c. Name the App and register - make a note of the Application (client) ID
-    
-    d. API Permissions, Add a permisison, then add Office 365 Management APIs – Delegated permissions, ServiceHealth.Read and 
-Microsoft Graph, Delegated Permissions, Group.ReadWrite.All
-
-    e. Grant admin consent for Contoso (or to whoever your tenant is)
-    
-    f. Authentication – Advanced settings – Default client type. Set to Yes for Treat application as a public client
+    a. Navigate to __Azure Active Directory Admin Center__ (__App Launcher, Admin, Show All, Admin Centers, Azure Active Directory__)  
+    b. Select __App registrations__    
+    c. Name the App and register - make a note of the Application (client) ID  
+    d. __API Permissions__, __Add a permisison__, then add Office 365 Management APIs – Delegated permissions, ServiceHealth.Read   and 
+    Microsoft Graph, Delegated Permissions, Group.ReadWrite.All  
+    e. __Grant admin consent for Contoso__ (or to whoever your tenant is)  
+    f. Authentication – Advanced settings – Default client type. Set to Yes for Treat application as a public client  
     
 8. Your Azure function should be ready now - so back to your Azure portal and find your Function App
 
