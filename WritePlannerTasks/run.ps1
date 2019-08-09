@@ -130,6 +130,7 @@ $newTaskId = $newTaskContent.id
 # Pull any urls out of the description to add as attachments
 $matches = New-Object System.Collections.ArrayList
 $matches.clear()
+$task.description = $task.description -replace '&amp;', '&'
 $regex = 'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)'
 # Find all matches in description and add to an array
 select-string -Input $messageCenterTask.description -Pattern $regex -AllMatches | % { $_.Matches } | % {     $matches.add($_.Value)}
