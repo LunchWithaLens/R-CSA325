@@ -45,6 +45,8 @@ If($message.MessageType -eq 'MessageCenter'){
 # Just gets messages that contain our products in the title - as applies to field is not used consistently    
 ForEach($product in $products){
     If($message.Title -match $product.product){
+# Swap em dash for dash
+$message.Title = $message.Title -replace '–', '-'         
 # Form our tasks using fields from the message        
 $task = @{}
 $task.Add('id', $message.Id)
