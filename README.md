@@ -77,7 +77,7 @@ A message may be copied to more than one bucket if it matches more than one prod
     a. __IMPORTANT!__  __Platform features__, __Function App settings__ and change Runtime version to 1  
     b. Add a function by clicking the __+__, choose __create your own custom function__    
     c. Enable Experimental Language Support to light up PowerShell, then choose PowerShell in the Timer trigger language list  
-    d. Leave __language__ as PowerShell, set the __name__ to ReadO365Messages, and set the __schedule__ to 0 0 16 * * (4pm UTC daily)  
+    d. Leave __language__ as PowerShell, set the __name__ to ReadO365Messages, and set the __schedule__ to 0 0 16 * * * (4pm UTC daily)  
     
 9. Configuring the ReadO365Messages function
 
