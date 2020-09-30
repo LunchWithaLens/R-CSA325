@@ -62,7 +62,7 @@ ForEach($existingTask in $messageCenterPlanTasksValue){
 if(!$taskExists){
 $setTask =@{}
 If($messageCenterTask.dueDate){
-$setTask.Add("dueDateTime", ([DateTime]$messageCenterTask.dueDate))
+$setTask.Add("dueDateTime", $messageCenterTask.dueDate)
 }
 $setTask.Add("orderHint", " !")
 # Fixing some weird encoding stuff - probably better way...
