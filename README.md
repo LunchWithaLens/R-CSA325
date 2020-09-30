@@ -1,6 +1,9 @@
 # R-CSA325
 ## Repo for Microsoft Ready session on O365 Message Center to Planner integration
 
+__NOTE__ As of 9/22/2020 similar functionality is availble in the Microsoft 365 Message Center itself for commercial tenants to sync messages to Planner.
+This will be available in GCC in the future.
+
 TL;DR
 The Azure fuctions can be used to 
 1. Read O365 Comms API, write the message center messages of interest to an Azure queue
